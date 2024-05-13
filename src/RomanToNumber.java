@@ -19,17 +19,30 @@ public class RomanToNumber {
         int number = 0;
 
         for(int i = 0; i < symbol.length(); i++){
+            //actual value
+            int current = roman.get(symbol.charAt(i));
 
-            number += roman.get(symbol.charAt(i));
-
+            if ( i + 1 < symbol.length()){
+                //check next value
+                int next = roman.get(symbol.charAt(i+1));
+                if(current >= next){
+                    //add
+                    number += current;
+                }else{
+                    //substract
+                    number -= current;
+                }
+            }else{
+                //add the next one
+                number += current;
+            }
         }
-
         return number;
     };
 
 
     public static void main(String[] args) {
-        int exRoman = romanToNumber("LIX");
+        int exRoman = romanToNumber("CCCIX");
 
         System.out.println(exRoman);
 
